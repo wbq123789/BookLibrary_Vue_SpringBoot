@@ -1,11 +1,12 @@
 package booklibrary.library_backend.config;
 
 import booklibrary.library_backend.entity.RestBean;
+import booklibrary.library_backend.entity.database_obj.Account;
 import booklibrary.library_backend.entity.view_obj.response.AuthorizeViewObj;
 import booklibrary.library_backend.filter.JwtAuthorizeFilter;
+import booklibrary.library_backend.service.AccountService;
 import booklibrary.library_backend.utils.JwtUtils;
 import jakarta.annotation.Resource;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +31,8 @@ public class SecurityConfiguration {
     JwtUtils jwtUtils;
     @Resource
     JwtAuthorizeFilter jwtAuthorizeFilter;
+    @Resource
+    AccountService accountService;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -63,26 +66,27 @@ public class SecurityConfiguration {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         User user = (User) authentication.getPrincipal();
-        String Token= jwtUtils.CreateJwt(user,1,"小明");
-        AuthorizeViewObj avo=new AuthorizeViewObj();
-        avo.setExpire(jwtUtils.expireTime());
-        avo.setRole("");
-        avo.setToken(Token);
-        avo.setUsername("小明");
+        Account account=accountService.findAccountByNameOrEmail(user.getUsername());
+        String Token= jwtUtils.CreateJwt(user,account.getId(),account.getUsername());
+        AuthorizeViewObj avo=account.asViewObj(AuthorizeViewObj.class,v->{
+            v.setToken(Token);
+            v.setExpire(jwtUtils.expireTime());
+        });
         response.getWriter().write(RestBean.success(avo).ToJsonString());
     }
     public void onLogoutSuccess(HttpServletRequest request,
                                 HttpServletResponse response,
-                                Authentication authentication) throws IOException, ServletException {
+                                Authentication authentication) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         PrintWriter writer = response.getWriter();
         String authorization = request.getHeader("Authorization");
         if(jwtUtils.inValidateJwt(authorization))
             writer.write(RestBean.success("退出登录成功").ToJsonString());
-        else
+        else{
             writer.write(RestBean.failure(400,"退出登录失败").ToJsonString());
-
+            response.setStatus(400);
+        }
     }
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response,

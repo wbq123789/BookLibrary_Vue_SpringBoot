@@ -1,5 +1,6 @@
 package booklibrary.library_backend.entity.database_obj;
 
+import booklibrary.library_backend.entity.BaseData;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -11,7 +12,7 @@ import java.util.Date;
 @Data
 @TableName("db_account")
 @AllArgsConstructor
-public class Account {
+public class Account implements BaseData {
     @TableId(type = IdType.AUTO)
     Integer id;
     String username;
