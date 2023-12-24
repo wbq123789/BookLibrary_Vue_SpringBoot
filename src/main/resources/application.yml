@@ -18,7 +18,7 @@ spring:
   mail:
     host: smtp.163.com
     username: javaweb111@163.com
-    password: CWWBJQKFDFLWMANQ
+    password: FCKMEDCZUOZYOHAN
   rabbitmq:
     addresses: localhost
     stream:
