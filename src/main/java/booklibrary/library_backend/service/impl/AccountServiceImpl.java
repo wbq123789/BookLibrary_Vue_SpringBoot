@@ -20,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -106,6 +107,16 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         boolean update = this.update().eq("email", email).set("password", password).update();
         if (update) stringRedisTemplate.delete(Const.VERIFY_EMAIL_DATA + email);
         return null;
+    }
+
+    @Override
+    public List<Account> findUserAccountList() {
+        return this.query().eq("role","user").list();
+    }
+
+    @Override
+    public String findUserCount() {
+        return String.valueOf(this.query().eq("role","user").count());
     }
 
     private boolean verifyLimit(String IP) {
