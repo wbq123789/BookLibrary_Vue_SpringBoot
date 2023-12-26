@@ -53,11 +53,6 @@ public class AccountController {
         return RestBean.success(JsonUtil.toJson(accountService.findAccountByNameOrEmail(UserName).getId()));
     }
 
-    @GetMapping("findUserId")
-    public RestBean<String> findUserIdByName(@RequestParam String UserName) {
-        return RestBean.success(JsonUtil.toJson(accountService.findAccountByNameOrEmail(UserName).getId()));
-    }
-
     /**
      * @Description: 获取用户总数
      * @Param: null
@@ -78,8 +73,8 @@ public class AccountController {
      * @Date: 2023/12/26
      */
     @PostMapping("getBorrowMessage")
-    public RestBean<String> getBorrowMessageById(@RequestBody @Validated UidViewObj obj) {
-        List<borrowMessageViewObj> borrowbookList = bookService.getBorrowBookById(Integer.parseInt(obj.getUid()));
+    public RestBean<String> getBorrowMessageById(@RequestBody @Validated UidViewObj uid) {
+        List<borrowMessageViewObj> borrowbookList = bookService.getBorrowBookById(Integer.parseInt(uid.getUid()));
         if (borrowbookList.isEmpty())
             return RestBean.success();
         return RestBean.success(JsonUtil.toJson(borrowbookList));
