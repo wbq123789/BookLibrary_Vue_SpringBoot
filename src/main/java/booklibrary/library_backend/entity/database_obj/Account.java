@@ -13,6 +13,11 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @Description: 数据库Account表
+ * @Author: 王贝强
+ * @Date: 2023/12/26
+ */
 @Data
 @TableName("db_account")
 @AllArgsConstructor

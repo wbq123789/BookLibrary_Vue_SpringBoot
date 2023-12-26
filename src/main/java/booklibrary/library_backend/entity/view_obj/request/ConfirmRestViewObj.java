@@ -9,11 +9,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
+/**
+ * @Description: 请求检验验证码实体
+ * @Author: 王贝强
+ * @Date: 2023/12/26
+ */
 @Data
 @AllArgsConstructor
 public class ConfirmRestViewObj {
     @Email
     String email;
-    @Length(min = 6,max = 6)
+    @Length(min = 6, max = 6)
     String code;
 }

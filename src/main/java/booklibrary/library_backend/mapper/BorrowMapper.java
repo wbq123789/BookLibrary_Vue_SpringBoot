@@ -10,9 +10,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-
+/**
+* @Description: MybatisMapper->BorrowMapper
+* @Author: 王贝强
+* @Date: 2023/12/26
+*/
 @Mapper
 public interface BorrowMapper extends BaseMapper<Borrow> {
-    @Select("select * from db_borrow where user_id = ${uid}")
-    List<Borrow> getListBorrowByUid(Integer uid);
 }

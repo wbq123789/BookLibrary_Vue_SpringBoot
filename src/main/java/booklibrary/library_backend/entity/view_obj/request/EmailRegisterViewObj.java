@@ -11,13 +11,18 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 
+/**
+ * @Description: 请求邮箱注册实体
+ * @Author: 王贝强
+ * @Date: 2023/12/26
+ */
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
 public class EmailRegisterViewObj {
     @Email
     String email;
-    @Length(max = 6,min = 6)
+    @Length(max = 6, min = 6)
     String code;
     @Pattern(regexp = "^[a-zA-Z0-9\\u4e00-\\u9fa5]+$")
     @Length(min = 1, max = 10)

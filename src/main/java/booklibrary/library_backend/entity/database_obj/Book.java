@@ -4,7 +4,6 @@
 
 package booklibrary.library_backend.entity.database_obj;
 
-import booklibrary.library_backend.entity.BaseData;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -12,10 +11,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @Description: 数据库book表
+ * @Author: 王贝强
+ * @Date: 2023/12/26
+ */
 @Data
 @TableName("db_book")
 @AllArgsConstructor
-public class Book{
+public class Book {
     @TableId(type = IdType.AUTO)
     Integer bid;
     String author;

@@ -12,7 +12,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
-
+/**
+* @Description: Mybatis_PlusService->AccountService
+* @Author: 王贝强
+* @Date: 2023/12/26
+*/
 public interface AccountService extends IService<Account>, UserDetailsService {
     Account findAccountByNameOrEmail(String Text);
     String registerEmailVerifyCode(String Type,String Email,String IP);

@@ -6,7 +6,11 @@ package booklibrary.library_backend.entity;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.JSONWriter;
-
+/**
+* @Description: JSON格式Message返回实体
+* @Author: 王贝强
+* @Date: 2023/12/26
+*/
 public record RestBean<T>(int code, T data, String message) {
     public static <T> RestBean<T> success(T data){
         return new RestBean<>(200,data,"请求成功");

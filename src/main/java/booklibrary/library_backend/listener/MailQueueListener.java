@@ -13,7 +13,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
-
+/**
+* @Description: 邮件接收监听器
+* @Author: 王贝强
+* @Date: 2023/12/26
+*/
 @Component
 public class MailQueueListener {
 
@@ -22,7 +26,13 @@ public class MailQueueListener {
 
     @Value("${spring.mail.username}")
     String username;
-
+    /**
+    * @Description: 从RabbitMq中获取邮件信息并发送邮件
+    * @Param: [data]
+    * @return: void
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @RabbitHandler
     @RabbitListener(queues = "mail")
     public void sendMailMessage(Map<String,Object> data) {
@@ -37,9 +47,16 @@ public class MailQueueListener {
             default -> null;
         };
         if(message == null) return;
+        //使用JavaMailSender发送邮件
         sender.send(message);
     }
-
+    /**
+    * @Description: 邮件信息生成
+    * @Param: [title, content, email]
+    * @return: org.springframework.mail.SimpleMailMessage
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     private SimpleMailMessage createMessage(String title, String content, String email){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject(title);

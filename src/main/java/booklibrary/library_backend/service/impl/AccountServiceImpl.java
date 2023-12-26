@@ -28,7 +28,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
+/**
+* @Description: Mybatis_PlusService->AccountService实现类
+* @Author: 王贝强
+* @Date: 2023/12/26
+*/
 @Service
 public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements AccountService {
 
@@ -40,7 +44,13 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     FlowUtils flowUtils;
     @Resource
     BCryptPasswordEncoder passwordEncoder;
-
+    /** 
+    * @Description: 通过用户名登陆
+    * @Param: [username]
+    * @return: UserDetails
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = this.findAccountByNameOrEmail(username);
@@ -52,7 +62,13 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
                 .roles(account.getRole())
                 .build();
     }
-
+    /**
+    * @Description: 通过用户名或email查找用户信息
+    * @Param: [String]
+    * @return: Account
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @Override
     public Account findAccountByNameOrEmail(String Text) {
         return this.query()
@@ -60,7 +76,13 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
                 .eq("email", Text)
                 .one();
     }
-
+    /** 
+    * @Description: 根据type将email放入RabbitMq和Redis
+    * @Param: [Type, Email, IP]
+    * @return: String
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @Override
     public String registerEmailVerifyCode(String Type, String Email, String IP) {
         synchronized (IP.intern()) {
@@ -75,7 +97,13 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             return null;
         }
     }
-
+    /**
+    * @Description: 通过用户信息注册账号
+    * @Param: [EmailRegisterViewObj]
+    * @return: String
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @Override
     public String registerEmailAccount(EmailRegisterViewObj obj) {
         String email = obj.getEmail();
@@ -92,7 +120,13 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         } else
             return "内部错误，请联系管理员";
     }
-
+    /**
+    * @Description: 校验重置密码验证码
+    * @Param: [ConfirmRestViewObj]
+    * @return: String
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @Override
     public String resetConfirm(ConfirmRestViewObj obj) {
         String email = obj.getEmail();
@@ -101,7 +135,13 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         if (!code.equals(obj.getCode())) return "验证码有误，请重新输入";
         return null;
     }
-
+    /**
+    * @Description: 通过邮箱验证码重置账户密码
+    * @Param: [EmailResetViewObj]
+    * @return: String
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @Override
     public String resetEmailAccountPassword(EmailResetViewObj obj) {
         String email = obj.getEmail();
@@ -112,26 +152,56 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         if (update) stringRedisTemplate.delete(Const.VERIFY_EMAIL_DATA + email);
         return null;
     }
-
+    /**
+    * @Description: 查询用户列表
+    * @Param: null
+    * @return: List<Account>
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @Override
     public List<Account> findUserAccountList() {
         return this.query().eq("role","user").list();
     }
-
+    /**
+    * @Description: 查询用户总数
+    * @Param: null
+    * @return: String
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     @Override
     public String findUserCount() {
         return String.valueOf(this.query().eq("role","user").count());
     }
-
+    /**
+    * @Description: 限制同一时间验证码发送
+    * @Param: [IP]
+    * @return: boolean
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     private boolean verifyLimit(String IP) {
         String key = Const.VERIFY_EMAIL_LIMIT + IP;
         return flowUtils.limitCheck(key, 60);
     }
-
+    /**
+    * @Description: 通过email查询数据库中是否存在用户
+    * @Param: [email]
+    * @return: boolean
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     private boolean exitsAccountByEmail(String email) {
         return this.baseMapper.exists(Wrappers.<Account>query().eq("email", email));
     }
-
+    /**
+    * @Description: 通过username查询数据库中是否存在用户
+    * @Param: [username]
+    * @return: boolean
+    * @Author: 王贝强
+    * @Date: 2023/12/26
+    */
     private boolean exitsAccountByUsername(String username) {
         return this.baseMapper.exists(Wrappers.<Account>query().eq("username", username));
     }

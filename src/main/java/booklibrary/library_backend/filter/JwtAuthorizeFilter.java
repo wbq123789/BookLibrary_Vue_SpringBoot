@@ -12,6 +12,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+/**
+* @Description: 配置JWT权限校验器
+* @Author: 王贝强
+* @Date: 2023/12/26
+*/
 @Component
 public class JwtAuthorizeFilter extends OncePerRequestFilter {
     @Resource
@@ -28,8 +34,9 @@ public class JwtAuthorizeFilter extends OncePerRequestFilter {
     UserUtils userUtils;
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+                                    @NotNull HttpServletResponse response,
+                                    @NotNull FilterChain filterChain) throws ServletException, IOException {
+        //请求访问必须携带Authorization请求头参数，内容：bearer+" "+Token
         String authorization =request.getHeader("Authorization");
         DecodedJWT jwt=jwtUtils.resolveJwt(authorization);
         if(jwt!=null){
