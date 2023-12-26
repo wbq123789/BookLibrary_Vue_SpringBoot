@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) wbq 2023.
+ */
+
 package booklibrary.library_backend.utils;
 
 import com.alibaba.fastjson2.JSON;

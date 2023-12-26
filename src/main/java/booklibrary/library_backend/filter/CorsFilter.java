@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) wbq 2023.
+ */
+
 package booklibrary.library_backend.filter;
 
 import booklibrary.library_backend.utils.Const;

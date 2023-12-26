@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) wbq 2023.
+ */
+
 package booklibrary.library_backend.entity.view_obj.response;
 
 import lombok.Data;

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) wbq 2023.
+ */
+
 package booklibrary.library_backend.service.impl;
 
 import booklibrary.library_backend.entity.database_obj.Book;
@@ -6,8 +10,6 @@ import booklibrary.library_backend.entity.view_obj.response.borrowMessageViewObj
 import booklibrary.library_backend.mapper.BookMapper;
 import booklibrary.library_backend.mapper.BorrowMapper;
 import booklibrary.library_backend.service.BookService;
-import booklibrary.library_backend.service.BorrowService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

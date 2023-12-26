@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) wbq 2023.
+ */
+
 package booklibrary.library_backend.controller;
 
 import booklibrary.library_backend.entity.RestBean;
@@ -6,7 +10,6 @@ import booklibrary.library_backend.service.AccountService;
 import booklibrary.library_backend.service.BookService;
 import booklibrary.library_backend.utils.JsonUtil;
 import jakarta.annotation.Resource;
-import jakarta.validation.constraints.Pattern;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

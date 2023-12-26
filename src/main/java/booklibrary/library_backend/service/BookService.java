@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) wbq 2023.
+ */
+
 package booklibrary.library_backend.service;
 
 import booklibrary.library_backend.entity.database_obj.Book;
