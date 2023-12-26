@@ -15,6 +15,7 @@ import java.util.Date;
  */
 @Data
 public class AuthorizeViewObj {
+    Integer id;
     String username;
     String role;
     String token; //JWT 令牌

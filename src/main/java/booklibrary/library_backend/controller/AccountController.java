@@ -5,17 +5,18 @@
 package booklibrary.library_backend.controller;
 
 import booklibrary.library_backend.entity.RestBean;
+import booklibrary.library_backend.entity.database_obj.Account;
+import booklibrary.library_backend.entity.view_obj.request.UidViewObj;
+import booklibrary.library_backend.entity.view_obj.response.AccountViewObj;
 import booklibrary.library_backend.entity.view_obj.response.borrowMessageViewObj;
 import booklibrary.library_backend.service.AccountService;
 import booklibrary.library_backend.service.BookService;
 import booklibrary.library_backend.utils.JsonUtil;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,7 +42,15 @@ public class AccountController {
      */
     @GetMapping("userList")
     public RestBean<String> getUserList() {
-        return RestBean.success(JsonUtil.toJson(accountService.findUserAccountList()));
+        List<Account> userAccountList = accountService.findUserAccountList();
+        List<AccountViewObj> viewObjList=new ArrayList<>();
+        userAccountList.forEach(account -> viewObjList.add(AccountViewObj.toAccount(account)));
+        return RestBean.success(JsonUtil.toJson(viewObjList));
+    }
+
+    @GetMapping("findUserId")
+    public RestBean<String> findUserIdByName(@RequestParam String UserName) {
+        return RestBean.success(JsonUtil.toJson(accountService.findAccountByNameOrEmail(UserName).getId()));
     }
 
     @GetMapping("findUserId")
@@ -68,9 +77,11 @@ public class AccountController {
      * @Author: 王贝强
      * @Date: 2023/12/26
      */
-    @GetMapping("getBorrowMessage")
-    public RestBean<String> getBorrowMessageById(@RequestParam String uid) {
-        List<borrowMessageViewObj> borrowbookList = bookService.getBorrowBookById(Integer.parseInt(uid));
+    @PostMapping("getBorrowMessage")
+    public RestBean<String> getBorrowMessageById(@RequestBody @Validated UidViewObj obj) {
+        List<borrowMessageViewObj> borrowbookList = bookService.getBorrowBookById(Integer.parseInt(obj.getUid()));
+        if (borrowbookList.isEmpty())
+            return RestBean.success();
         return RestBean.success(JsonUtil.toJson(borrowbookList));
     }
 }

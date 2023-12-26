@@ -21,8 +21,6 @@ import java.util.List;
 */
 @Service
 public class BorrowServiceImpl extends ServiceImpl<BorrowMapper, Borrow> implements BorrowService {
-    @Resource
-    BorrowMapper borrowMapper;
     /**
      * @Description: 获取用户借阅信息
      * @Param: [user_id]
@@ -33,8 +31,8 @@ public class BorrowServiceImpl extends ServiceImpl<BorrowMapper, Borrow> impleme
     @Override
     public List<Borrow> getBorrowListByUserId(Integer user_id) {
         QueryWrapper<Borrow> wrapper=new QueryWrapper<>();
-        wrapper.select("bid")
-                .eq("user_id",user_id);
+        wrapper.select("bookId","borrowTime")
+                .eq("userId",user_id);
         return this.list(wrapper);
     }
 

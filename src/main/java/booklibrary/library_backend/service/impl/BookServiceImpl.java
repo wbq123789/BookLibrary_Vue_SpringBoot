@@ -42,9 +42,9 @@ public class BookServiceImpl extends ServiceImpl<BookMapper,Book> implements Boo
         List<Book> bookList=new ArrayList<>();
         List<borrowMessageViewObj> borrowList=new ArrayList<>();
         list.forEach(borrow-> bookList.add(this.getById(borrow.getBookId())));
-        list.forEach(borrow -> bookList
-                .forEach(book -> borrowList
-                        .add(new borrowMessageViewObj(book,borrow))));
+        for (int i = 0; i < list.size(); i++) {
+                borrowList.add(new borrowMessageViewObj(bookList.get(i),list.get(i)));
+        }
         return borrowList;
     }
     /**

@@ -34,5 +34,6 @@ public class borrowMessageViewObj {
         this.bid = book.getBid();
         this.desc = book.getDesc();
         this.time = borrow.getBorrowTime();
+        this.label=book.getLabel();
     }
 }

@@ -5,6 +5,7 @@
 package booklibrary.library_backend.entity.database_obj;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,10 @@ import java.util.Date;
 public class Borrow {
     @TableId(type = IdType.AUTO)
     Integer id;
+    @TableField("userId")
     Integer userId;
+    @TableField("bookId")
     Integer bookId;
+    @TableField("borrowTime")
     Date borrowTime;
 }

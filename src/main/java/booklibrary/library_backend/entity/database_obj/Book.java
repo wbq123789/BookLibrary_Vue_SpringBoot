@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * @Description: 数据库book表
@@ -18,7 +20,9 @@ import lombok.Data;
  */
 @Data
 @TableName("db_book")
+@Accessors(chain = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class Book {
     @TableId(type = IdType.AUTO)
     Integer bid;
