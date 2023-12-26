@@ -44,6 +44,11 @@ public class AccountController {
         return RestBean.success(JsonUtil.toJson(accountService.findUserAccountList()));
     }
 
+    @GetMapping("findUserId")
+    public RestBean<String> findUserIdByName(@RequestParam String UserName) {
+        return RestBean.success(JsonUtil.toJson(accountService.findAccountByNameOrEmail(UserName).getId()));
+    }
+
     /**
      * @Description: 获取用户总数
      * @Param: null

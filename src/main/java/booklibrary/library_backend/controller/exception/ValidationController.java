@@ -2,7 +2,7 @@
  * Copyright (c) wbq 2023.
  */
 
-package booklibrary.library_backend.controller.exceptiom;
+package booklibrary.library_backend.controller.exception;
 
 import booklibrary.library_backend.entity.RestBean;
 import jakarta.validation.ValidationException;

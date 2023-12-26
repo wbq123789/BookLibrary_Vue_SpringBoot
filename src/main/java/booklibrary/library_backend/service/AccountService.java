@@ -25,4 +25,5 @@ public interface AccountService extends IService<Account>, UserDetailsService {
     String resetEmailAccountPassword(EmailResetViewObj obj);
     List<Account> findUserAccountList();
     String findUserCount();
+
 }

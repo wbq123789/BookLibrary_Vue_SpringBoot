@@ -7,6 +7,7 @@ package booklibrary.library_backend.controller;
 import booklibrary.library_backend.entity.RestBean;
 import booklibrary.library_backend.entity.database_obj.Book;
 import booklibrary.library_backend.entity.database_obj.Borrow;
+import booklibrary.library_backend.entity.view_obj.request.BorrowBookViewObj;
 import booklibrary.library_backend.service.BookService;
 import booklibrary.library_backend.service.BorrowService;
 import booklibrary.library_backend.utils.JsonUtil;
@@ -42,11 +43,10 @@ public class BookController {
      * @Date: 2023/12/26
      */
     @PostMapping("borrowBook")
-    public RestBean<String> borrowBookById(@RequestParam String uid,
-                                           @RequestParam String bid) {
+    public RestBean<String> borrowBookById(@RequestBody @Validated BorrowBookViewObj obj) {
         Borrow borrow = new Borrow();
-        borrow.setBookId(Integer.valueOf(bid))
-                .setUserId(Integer.valueOf(uid))
+        borrow.setBookId(Integer.valueOf(obj.getBid()))
+                .setUserId(Integer.valueOf(obj.getUid()))
                 .setBorrowTime(new Date());
         boolean save = borrowService.save(borrow);
         if (save) return RestBean.success("借阅成功");
@@ -61,10 +61,9 @@ public class BookController {
      * @Date: 2023/12/26
      */
     @PostMapping("returnBook")
-    public RestBean<String> returnBookById(@RequestParam String uid,
-                                           @RequestParam String bid) {
+    public RestBean<String> returnBookById(@RequestBody @Validated BorrowBookViewObj obj) {
         QueryWrapper<Borrow> wrapper = new QueryWrapper<>();
-        wrapper.select().eq("user_id", uid).eq("book_id", bid);
+        wrapper.select().eq("user_id", obj.getUid()).eq("book_id", obj.getBid());
         boolean remove = borrowService.remove(wrapper);
         if (!remove) return RestBean.failure(402, "借阅信息不存在");
         else return RestBean.success("书籍归还成功");
