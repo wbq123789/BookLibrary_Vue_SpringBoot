@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: '@environment@'
   security:
     jwt:
       key: LibraryManagement
@@ -15,10 +17,6 @@ spring:
     username: root
     password: wbq123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-  mail:
-    host: smtp.163.com
-    username: javaweb111@163.com
-    password: FCKMEDCZUOZYOHAN
   rabbitmq:
     addresses: localhost
     stream:
