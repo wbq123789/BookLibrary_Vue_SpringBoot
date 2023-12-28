@@ -5,9 +5,9 @@
                       src="./src/assets/background.png"/>
         </div>
         <div class="welcome-title">
-            <div style="font-size: 30px;font-weight: bold">欢迎来到我们的学习平台</div>
-            <div style="margin-top: 10px"></div>
-            <div style="margin-top: 5px"></div>
+            <div style="font-size: 30px;font-weight: bold">欢迎来到我们的图书管理系统</div>
+            <div style="margin-top: 10px;font-family: cursive;">学术研究 +qq 1724593655 Flying</div>
+            <div style="margin-top: 5px;font-family: fantasy;"><span style="color:rgb(255, 0, 230)">搞怪研究</span> +weixin T307103335 小涂什么都不知道</div>
         </div>
         <div class="right-card">
             <router-view v-slot="{ Component }">

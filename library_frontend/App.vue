@@ -1,6 +1,6 @@
 <script setup>
 import { useDark, useToggle } from '@vueuse/core'
-
+import "@icon-park/vue/style/index.css"
 useDark({
   selector: 'html',
   attribute: 'class',

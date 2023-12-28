@@ -52,7 +52,7 @@
 import {User, Lock} from '@element-plus/icons-vue'
 import router from "@/router";
 import {reactive, ref} from "vue";
-import {login} from '@/net'
+import {login , getUserMessage} from '@/net'
 
 const formRef = ref()
 const form = reactive({
@@ -73,7 +73,17 @@ const rules = {
 function userLogin() {
   formRef.value.validate((isValid) => {
     if(isValid) {
-      login(form.username, form.password, form.remember, () => router.push("/index"))
+      login(form.username, form.password, form.remember, 
+      () => {
+        let person = {
+        username:'',
+        role:''
+      }
+      person=getUserMessage();
+      console.log(person)
+        router.push("/index")
+      }
+      )
     }
   });
 }

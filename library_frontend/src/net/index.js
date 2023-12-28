@@ -2,7 +2,7 @@ import axios from "axios";
 import {ElMessage} from "element-plus";
 
 const authItemName = "authorize"
-
+const UserMessage="User";
 const accessHeader = () => {
     return {
         'Authorization': `Bearer ${takeAccessToken()}`
@@ -30,7 +30,33 @@ function takeAccessToken() {
     }
     return authObj.token
 }
-
+function getUserMessage(){
+    let str=null;
+    if(str=localStorage.getItem(UserMessage))
+        return JSON.parse(str);
+    else if(str=sessionStorage.getItem(UserMessage))
+        return JSON.parse(str);
+    else
+        ElMessage.failure("出现错误，请联系管理员");
+}
+function getUserIdByName(username,success){
+    get(`/api/account/findUserId?UserName=${username}`,(data)=>{
+        success(data)
+    })
+}
+function storeUserToken(remember,username,role){
+    const User={
+        username:username,
+        role:role
+    }
+    const str = JSON.stringify(User)
+    if(remember)
+        {
+            localStorage.setItem(UserMessage, str)
+        }
+    else
+        sessionStorage.setItem(UserMessage, str)
+}
 function storeAccessToken(remember, token, expire){
     const authObj = {
         token: token,
@@ -38,12 +64,17 @@ function storeAccessToken(remember, token, expire){
     }
     const str = JSON.stringify(authObj)
     if(remember)
-        localStorage.setItem(authItemName, str)
+        {
+            localStorage.setItem(authItemName, str)
+
+        }
     else
         sessionStorage.setItem(authItemName, str)
 }
 
 function deleteAccessToken() {
+    localStorage.removeItem(UserMessage)
+    sessionStorage.removeItem(UserMessage)
     localStorage.removeItem(authItemName)
     sessionStorage.removeItem(authItemName)
 }
@@ -74,6 +105,7 @@ function login(username, password, remember, success, failure = defaultFailure){
         'Content-Type': 'application/x-www-form-urlencoded'
     }, (data) => {
         storeAccessToken(remember, data.token, data.expire)
+        storeUserToken(remember,username,data.role)
         ElMessage.success(`登录成功，欢迎 ${data.username} 来到我们的系统`)
         success(data)
     }, failure)
@@ -83,12 +115,28 @@ function post(url, data, success, failure = defaultFailure) {
     internalPost(url, data, accessHeader() , success, failure)
 }
 
+function borrowBook(uid,bid,success){
+    post('/api/book/borrowBook?uid',{
+        uid:uid,
+        bid:bid
+    },{
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },(data)=>{
+        success(data)
+    },failure)
+}
 function logout(success, failure = defaultFailure){
     get('/api/auth/logout', () => {
         deleteAccessToken()
         ElMessage.success(`退出登录成功，欢迎您再次使用`)
         success()
     }, failure)
+}
+
+function getBookList(type,success, failure = defaultFailure){
+    get(`/api/book/bookList?type=${type}`,(data)=>{
+        success(data)
+    },failure)
 }
 
 function get(url, success, failure = defaultFailure) {
@@ -99,4 +147,5 @@ function unauthorized() {
     return !takeAccessToken()
 }
 
-export { post, get, login, logout, unauthorized }
+
+export { post, get, login, logout, unauthorized,getUserMessage,getBookList,borrowBook,getUserIdByName}
