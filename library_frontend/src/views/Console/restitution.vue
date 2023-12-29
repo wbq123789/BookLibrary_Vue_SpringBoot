@@ -15,16 +15,14 @@
 </template>
 
 <script >
-import { getUserBorrowMessage, returnBook,getUserIdByName} from '@/net';
+import { getUserBorrowMessage, returnBook,getUserMessage} from '@/net';
 import { ref,onMounted } from 'vue';
 import { ElTable } from 'element-plus';
 
 export default {
   setup() {
-    let userId;
-    getUserIdByName((data) => {
-      userId = JSON.parse(data)
-    })
+    let user = getUserMessage();
+    console.log(user)
     let tableData =ref([{
       bid: '',
       title: '',
@@ -34,12 +32,12 @@ export default {
     onMounted(() => {
       getUserBorrowMessage;
     });
-    getUserBorrowMessage(1,(book) => {
+    getUserBorrowMessage(user.userid,(book) => {
       tableData.value = JSON.parse(book);
       console.log(tableData.value);
     });
     function restitutionBook(index) {
-      returnBook(userId, tableData.value[index].bid, () => {
+      returnBook(user.userid, tableData.value[index].bid, () => {
         window.location.reload();
       });
     }

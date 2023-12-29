@@ -21,13 +21,7 @@ import router from "@/router";
 import { ref } from 'vue'
 
 const activeIndex = ref('1');
-
-let User = {
-  username:'',
-  role:''
-}
-
-User=getUserMessage();
+let User=getUserMessage();
 function userLogout() {
   logout(() => router.push("/"))
 }

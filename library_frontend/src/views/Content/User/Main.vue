@@ -11,6 +11,8 @@
       </ul>                    
     </div>
   </div>
+  <div><span>注册人数：{{personSum.valueOf()}}</span></div>
+  <div><span>书籍总数：{{bookSum.valueOf()}}</span></div>
 	<div class="common-footer">
   <ul class="common-footer-row1 wrap-1280">
     <li class="li1">
@@ -127,6 +129,8 @@
 
 <script>
 import { getToken } from '@/assets/auth.js'
+import { getBookCount , getUserCount} from '@/net';
+import {ref} from "vue";
 export default {
 	components: {},
 	props: {},
@@ -139,7 +143,7 @@ export default {
       ],
       currentIndex: 0,
       timer: null,
-      islogin: getToken()
+      islogin: getToken(),
     }
   },
 	methods: {
@@ -170,7 +174,17 @@ export default {
   },
 	mounted:function(){
 		this.runInv();
-	}
+	},setup(){
+    let personSum = ref('')
+    let bookSum = ref('')
+    getUserCount((data)=>{
+      personSum.value = JSON.parse(data)
+    })
+    getBookCount((data)=>{
+      bookSum.value = JSON.parse(data)
+    })
+    return {personSum,bookSum}
+  }
 };
 </script>
 

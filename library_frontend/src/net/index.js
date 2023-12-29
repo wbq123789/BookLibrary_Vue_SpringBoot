@@ -39,16 +39,21 @@ function takeAccessToken() {
 
 function getUserMessage(){
     let str=null;
-    if(str = localStorage.getItem(UserMessage))
+    if(str = localStorage.getItem(UserMessage)) {
+        console.log(str)
         return JSON.parse(str);
-    else if(str = sessionStorage.getItem(UserMessage))
+    }
+    else if(str = sessionStorage.getItem(UserMessage)){
+        console.log(str)
         return JSON.parse(str);
+    }
     else
         ElMessage.failure("出现错误，请联系管理员");
 }
 
 function getUserIdByName(success){
     let User = {
+        userid:null,
         username:null,
         role:null
         }
@@ -58,8 +63,9 @@ function getUserIdByName(success){
     })
 }
 
-function storeUserToken(remember,username,role){
+function storeUserToken(remember,userid,username,role){
     const User={
+        userid:userid,
         username:username,
         role:role
     }
@@ -120,7 +126,7 @@ function login(username, password, remember, success, failure = defaultFailure){
         'Content-Type': 'application/x-www-form-urlencoded'
     }, (data) => {
         storeAccessToken(remember, data.token, data.expire)
-        storeUserToken(remember,username,data.role)
+        storeUserToken(remember,data.id,username,data.role)
         ElMessage.success(`登录成功，欢迎 ${data.username} 来到我们的系统`)
         success(data)
     }, failure)
@@ -184,8 +190,8 @@ function getBookList(type,success, failure = defaultFailure){
     })
 }//获取书籍列表
 
-function getBookCount(type,success, failure = defaultFailure){
-    get(`/api/book/bookList?type=${type}`,(data)=>{
+function getBookCount(success, failure = defaultFailure){
+    get(`/api/book/bookCount`,(data)=>{
         success(data)
     })
 }//获取书籍总数
@@ -222,4 +228,4 @@ function unauthorized() {
 
 export { post, get, login, logout, unauthorized,
     getUserMessage,getUserIdByName,getBookList,getBookCount,borrowBook,returnBook,addBook,deleteBook,getUserList
-,getUserBorrowMessage};
+,getUserBorrowMessage,getUserCount};

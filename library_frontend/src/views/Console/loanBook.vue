@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { getBookList, borrowBook, getUserMessage, getUserIdByName } from '@/net';
+import { getBookList, borrowBook, getUserIdByName } from '@/net';
 import { ref, onMounted } from 'vue';
 import { ElTable } from 'element-plus';
 export default {
