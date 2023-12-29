@@ -3,6 +3,12 @@ import {ElMessage} from "element-plus";
 
 const authItemName = "authorize"
 const UserMessage="User";
+const defaultUserName='Test';
+let Data={
+    code: null,
+    data: null,
+    message:null
+}
 const accessHeader = () => {
     return {
         'Authorization': `Bearer ${takeAccessToken()}`
@@ -30,20 +36,28 @@ function takeAccessToken() {
     }
     return authObj.token
 }
+
 function getUserMessage(){
     let str=null;
-    if(str=localStorage.getItem(UserMessage))
+    if(str = localStorage.getItem(UserMessage))
         return JSON.parse(str);
-    else if(str=sessionStorage.getItem(UserMessage))
+    else if(str = sessionStorage.getItem(UserMessage))
         return JSON.parse(str);
     else
         ElMessage.failure("出现错误，请联系管理员");
 }
-function getUserIdByName(username,success){
-    get(`/api/account/findUserId?UserName=${username}`,(data)=>{
+
+function getUserIdByName(success){
+    let User = {
+        username:null,
+        role:null
+        }
+    User=getUserMessage()
+    get(`/api/account/findUserId?UserName=${User.username}`,(data)=>{
         success(data)
     })
 }
+
 function storeUserToken(remember,username,role){
     const User={
         username:username,
@@ -57,6 +71,7 @@ function storeUserToken(remember,username,role){
     else
         sessionStorage.setItem(UserMessage, str)
 }
+
 function storeAccessToken(remember, token, expire){
     const authObj = {
         token: token,
@@ -116,15 +131,45 @@ function post(url, data, success, failure = defaultFailure) {
 }
 
 function borrowBook(uid,bid,success){
-    post('/api/book/borrowBook?uid',{
+    post('/api/book/borrowBook',{
         uid:uid,
         bid:bid
-    },{
-        'Content-Type': 'application/x-www-form-urlencoded'
     },(data)=>{
+        ElMessage.success(`书籍借阅成功`)
         success(data)
-    },failure)
-}
+    })
+} //借书
+
+function returnBook(uid,bid,success){
+    post('/api/book/returnBook',{
+        uid:uid,
+        bid:bid
+    },(data)=>{
+        ElMessage.success(`书籍归还成功`)
+        success(data)
+    })
+}//还书
+function addBook(title,author,desc,label,success){
+    post('/api/book/addBook',{
+        title: title,
+        author:author,
+        desc: desc,
+        label: label,
+    },(data)=>{
+        ElMessage.success(`书籍添加成功`)
+        success(data)
+    })
+}//添加书籍
+
+function deleteBook(bid,success){
+    post('/api/book/deleteBook',{
+        bid: bid,
+    },(data)=>{
+        ElMessage.success(`书籍添加成功`)
+        success(data)
+    })
+}//删除书籍
+
 function logout(success, failure = defaultFailure){
     get('/api/auth/logout', () => {
         deleteAccessToken()
@@ -136,16 +181,45 @@ function logout(success, failure = defaultFailure){
 function getBookList(type,success, failure = defaultFailure){
     get(`/api/book/bookList?type=${type}`,(data)=>{
         success(data)
-    },failure)
-}
+    })
+}//获取书籍列表
+
+function getBookCount(type,success, failure = defaultFailure){
+    get(`/api/book/bookList?type=${type}`,(data)=>{
+        success(data)
+    })
+}//获取书籍总数
+
+function getUserCount(success){
+    get("/api/account/userCount",(data)=>{
+        success(data);
+    })
+}//获取用户总数
+
+function getUserList(success){
+    get("/api/account/userList",(data)=>{
+        success(data);
+    })
+}//获取用户列表
+
+function getUserBorrowMessage(uid,success){
+
+    post(`/api/account/getBorrowMessage`,{
+        uid:uid
+    },(data)=>{
+        success(data)
+    })
+    
+}//获取用户借阅书籍信息
 
 function get(url, success, failure = defaultFailure) {
     internalGet(url, accessHeader(), success, failure)
 }
-
 function unauthorized() {
     return !takeAccessToken()
 }
 
 
-export { post, get, login, logout, unauthorized,getUserMessage,getBookList,borrowBook,getUserIdByName}
+export { post, get, login, logout, unauthorized,
+    getUserMessage,getUserIdByName,getBookList,getBookCount,borrowBook,returnBook,addBook,deleteBook,getUserList
+,getUserBorrowMessage};

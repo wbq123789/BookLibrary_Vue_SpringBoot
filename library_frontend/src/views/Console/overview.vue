@@ -1,13 +1,50 @@
 <template>
-  <p>overview</p>
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column property="id" label="用户编号" width="150" />
+    <el-table-column property="username" label="用户姓名" width="300" />
+    <el-table-column property="email" label="用户邮箱" width="600" />
+    <el-table-column property="register_time" label="注册时间" />
+  </el-table>
 </template>
 
-<script>
-let num = 0;
+<script setup>
+import { getUserList } from '@/net';
+import { ref, onMounted } from 'vue';
 
+const currentDate = ref(new Date());
+const tableData = ref([]);
+
+onMounted(() => {
+  getUserList((user) => {
+    tableData.value = JSON.parse(user);
+    console.log(tableData.value);
+  });
+});
 </script>
 
 
-<style>
 
+<style>
+.time {
+  font-size: 12px;
+  color: #999;
+}
+
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  padding: 0;
+  min-height: auto;
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
 </style>

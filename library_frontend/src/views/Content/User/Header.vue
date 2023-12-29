@@ -1,7 +1,7 @@
 <template>
   <title>图书管理系统</title>
   <div class="Header">
-    <div class="title">图书管理系统
+    <div class="title"><RouterLink :to="{ name : 'UserMain'}">图书管理系统</RouterLink>
     </div>
       <img
         style="width: 70px"
@@ -34,6 +34,19 @@ function userLogout() {
 </script>
 
 <style>
+div a {
+  font-weight: bold;
+  color: #2c3e50;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+div a.router-link-exact-active {
+  color: rgb(230, 161, 233);
+}
+
+
 .Header{
   height: 70px;
   background-color: antiquewhite;

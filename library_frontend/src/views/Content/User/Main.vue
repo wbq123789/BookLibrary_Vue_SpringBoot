@@ -89,72 +89,25 @@
       </div>
     </li>
     <li class="li4">
-      <h5>相关链接</h5>
-      
+      <h5>相关链接</h5>     
         <p> <a href="https://www.mct.gov.cn/" target="_blank">
             中华人民共和国文化和旅游部
           </a> </p>
-      
-
         <p> <a href="https://www.ccdy.cn/" target="_blank">
             中国文化传媒网
           </a> </p>
-      
-
         <p> <a href="http://www.lsc.org.cn/cns/index.html" target="_blank">
             中国图书馆学会
           </a> </p>
-      
-
         <p> <a href="https://www.culturedc.cn/web2.1/index.html" target="_blank">
             国家公共文化云
           </a> </p>
-      
-
         <p> <a href="http://www.nlcpress.com/" target="_blank">
             国家图书馆出版社
           </a> </p>
-      
-
         <p> <a href="http://www.chinaabp.cn/" target="_blank">
             中国古籍保护协会
           </a> </p>
-      
-
-    </li>
-    <li class="li5">
-      
-        <dl>
-          <dt class=""> <img src="/template_resource/10008/img/icon-wb.png" class="noCode load" alt="国家图书馆官方微博二维码"> <img src="/template_resource/10008/img/icon-wb-code.png?v=123" class="code load" alt="国家图书馆官方微博二维码"> </dt>
-          <dd>
-            微博
-          </dd>
-        </dl>
-      
-      
-        <dl>
-          <dt> <img src="/template_resource/10008/img/icon-wx.png" class="noCode load" alt="国家图书馆官方微信二维码"> <img src="/template_resource/10008/img/icon-wx-code.png?v=123" class="code load" alt="国家图书馆官方微信二维码"> </dt>
-          <dd>
-            微信
-          </dd>
-        </dl>
-      
-      
-        <dl>
-          <dt> <img src="/template_resource/10008/img/icon-dy.png" class="noCode load" alt="国家图书馆官方抖音二维码"> <img src="/template_resource/10008/img/icon-dy-code.png?v=123" class="code load" alt="国家图书馆官方抖音二维码"> </dt>
-          <dd>
-            抖音
-          </dd>
-        </dl>
-      
-      
-        <dl>
-          <dt> <img src="/template_resource/10008/img/icon-gt.png?v=111" alt="掌上国图二维码" class="load"> <img src="/template_resource/10008/img/icon-gt-code.png?v=123" class="code load" alt="掌上国图二维码"> </dt>
-          <dd>
-            掌上国图
-          </dd>
-        </dl>
-      
     </li>
   </ul>
   <ul class="common-footer-row2 wrap-1280">
@@ -166,7 +119,7 @@
         人才招聘
       </a> </li>
     <li> <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">京ICP备05014420号</a> <span>|</span>
-      <a>电话：（+86 10）88545426</a> <span>|</span> <b>© 中国国家图书馆版权所有</b> </li> <a target="_blank" href="https://bszs.conac.cn/sitename?method=show&amp;id=37DFB7402E4D3CF3E053022819ACB320"> <img src="/template_resource/10008/img/cion-mark.png" alt="全国党政机关事业单位互联网网站标识管理服务平台" class="load"> </a>
+      <a>电话：（+86 10）88545426</a> <span>|</span> <b>© 中国国家图书馆版权所有</b> </li> <a target="_blank" href="https://bszs.conac.cn/sitename?method=show&amp;id=37DFB7402E4D3CF3E053022819ACB320"></a>
   </ul>
 </div>
 </template> 

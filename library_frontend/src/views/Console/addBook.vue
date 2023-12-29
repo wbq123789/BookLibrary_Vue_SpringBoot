@@ -5,7 +5,9 @@
 
     <label>作者:</label>
     <input type="text" required v-model="author">
-    <div v-if='passwordError' class="error">{{ passwordError }}</div>
+
+    <label>简介:</label>
+    <input type="text" required v-model="desc">
 
     <label>类型:(按下空格键加入一个标签)</label>
     <input type="text" v-model="tempSkill" @keyup="addSkill">
@@ -18,13 +20,14 @@
       <label>确认信息无误</label>
     </div>
 
-    <div class="submit">
+    <div class="submit" @click="book">
       <button>添加书籍</button>
     </div>
   </form>
 </template>
 
 <script>
+import { addBook } from '@/net';
 export default {
   components: {},
   props: {},
@@ -32,6 +35,7 @@ export default {
     return {
       title:'',
       author:'',
+      desc:"",
       terms:false,
       tempSkill:'',
       skills:[],
@@ -53,6 +57,16 @@ export default {
     },
     handleSubmit(){
       console.log(this.skills)
+    },
+    book(){
+      let str=''
+      for(let i=0;i<this.skills.length;i++){
+        str+=this.skills[i]
+      }
+      addBook(this.title,this.author,this.desc,str,()=>{
+        window.location.reload();
+      })
+  
     }
   },
 };
