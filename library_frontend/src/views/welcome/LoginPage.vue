@@ -76,8 +76,9 @@ function userLogin() {
       login(form.username, form.password, form.remember, 
       () => {
         let person = {
-        username:'',
-        role:''
+          userid:null,
+          username:null,
+          role:null
       }
       person=getUserMessage();
       console.log(person)
