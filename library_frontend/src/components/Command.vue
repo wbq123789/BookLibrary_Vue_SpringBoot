@@ -1,11 +1,12 @@
 import { getUserMessage } from '@/net';
 <template>
-  <el-menu 
+  <el-menu
       active-text-color="#ffd04b"
-      background-color="#545c64"
       class="el-menu-vertical-demo"
       default-active="2"
-      text-color="#fff">
+      text-color="purple"
+
+  >
     <h2>功能导航</h2>
     <el-menu-item @click="ClickTo(item)" v-for="item in Admin" :key="item.name" :index="item.name" v-if="UserName=='admin'">
       <el-icon><component :is="item.icon"/></el-icon>
@@ -20,6 +21,7 @@ import { getUserMessage } from '@/net';
 
 <script lang="ts">
 import {getUserMessage} from '@/net';
+
 export default {
   data() {
     return {
@@ -92,12 +94,25 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
-  min-height: 400px;
+  min-height: 100%;
 }
-.el-menu{
-  height: 100vh;
+h2{
+  padding: 0;
+  border: none;
+  font-size: xx-large;
+  text-align: center;
+  transform:translateY(10px);
+  translate: -12px;
+  color: #2c3e50;
+  font-family: "Kaiti SC";
 }
+li{
+  font-size: x-large;
+  font-family: "Wawati SC";
+}
+ul{
+  background:linear-gradient(#a8edea,#fed6e3);}
 </style>

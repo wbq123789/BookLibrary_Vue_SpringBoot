@@ -11,23 +11,18 @@
       </ul>                    
     </div>
   </div>
+  <div class="zcrs">注册人数：{{personSum.valueOf()}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;书籍总数：{{bookSum.valueOf()}}</div>
 	<div class="common-footer">
   <ul class="common-footer-row1 wrap-1280">
     <li class="li1">
-      <h5>关于国图</h5>
-      
-        <p> <a href="https://www.nlc.cn/web/dsb_footer/gygt/gld/index.shtml" target="_blank">
-            馆领导
-          </a> </p>
-      
-
+      <h5>关于图书馆</h5>
         <p> <a href="https://www.nlc.cn/web/dsb_footer/gygt/jgsz/index.shtml" target="_blank">
             机构设置
           </a> </p>
       
 
         <p> <a href="https://www.nlc.cn/web/dsb_footer/gygt/lsyg/index.shtml" target="_blank">
-            国图概况
+            图书馆概况
           </a> </p>
       
 
@@ -44,70 +39,17 @@
         <p> <a href="https://www.nlc.cn/web/dsb_footer/gygt/fwgf/index.shtml" target="_blank">
             服务规范
           </a> </p>
-      
 
-        <p> <a href="https://www.nlc.cn/web/dsb_footer/gygt/guanshuqiye/index.shtml" target="_blank">
-            馆属企业
-          </a> </p>
-      
-
-    </li>
-    <li class="li2">
-      <h5>支持我们</h5>
-      
-        <p> <a href="https://www.nlc.cn/web/dsb_footer/dsb_zcwm/dsb_cbwjs/index.shtml" target="_blank">
-            出版物交存
-          </a> </p>
-      
-
-        <p> <a href="https://www.nlc.cn/web/dsb_footer/dsb_zcwm/wenxianjuanzeng/index.shtml" target="_blank">
-            文献捐赠
-          </a> </p>
-      
-
-        <p> <a href="https://www.nlc.cn/web/dsb_footer/dsb_zcwm/dsb_wxjz/index.shtml" target="_blank">
-            征集启事
-          </a> </p>
-      
-
-      
     </li>
     <li class="li3">
       <h5>联系我们</h5>
       <div class="about-block">
-        <p class="about"> <a href="https://www.nlc.cn/web/dzzn/tushiguotu/dsb_tsgt/index.shtml" target="_blank"> -国家图书馆总馆   国家典籍博物馆- </a></p>
-        <p>地址：北京市海淀区中关村南大街33号</p>
-        <p>邮编：100081</p>
-        <p>服务咨询电话：4006006988、（+86 10）88545426</p>
-        <p>E-mail：webmaster@nlc.cn</p>
+        <p class="about"> <a href="https://www.nlc.cn/web/dzzn/tushiguotu/dsb_tsgt/index.shtml" target="_blank"> -湖北文理学院   软工2111-508图书馆- </a></p>
+        <p>地址：湖北省襄阳市湖北文理学院</p>
+        <p>邮编：441100</p>
+        <p>（+86 10）15392822811/177712522161</p>
+        <p>E-mail：2902471892@qq.com</p>
       </div>
-      <div>
-        <p class="about"> <a href="https://www.nlc.cn/web/dzzn/tushiguotu/dsb_tsgt/index.shtml" target="_blank"> -国家图书馆古籍馆- </a></p>
-        <p>地址：北京市西城区文津街7号 国家图书馆古籍馆</p>
-        <p>邮编：100034</p>
-        <p>电话：（+86 10）88003091</p>
-      </div>
-    </li>
-    <li class="li4">
-      <h5>相关链接</h5>     
-        <p> <a href="https://www.mct.gov.cn/" target="_blank">
-            中华人民共和国文化和旅游部
-          </a> </p>
-        <p> <a href="https://www.ccdy.cn/" target="_blank">
-            中国文化传媒网
-          </a> </p>
-        <p> <a href="http://www.lsc.org.cn/cns/index.html" target="_blank">
-            中国图书馆学会
-          </a> </p>
-        <p> <a href="https://www.culturedc.cn/web2.1/index.html" target="_blank">
-            国家公共文化云
-          </a> </p>
-        <p> <a href="http://www.nlcpress.com/" target="_blank">
-            国家图书馆出版社
-          </a> </p>
-        <p> <a href="http://www.chinaabp.cn/" target="_blank">
-            中国古籍保护协会
-          </a> </p>
     </li>
   </ul>
   <ul class="common-footer-row2 wrap-1280">
@@ -118,8 +60,8 @@
       </a> <span>|</span> <a href="https://www.nlc.cn/web/dsb_footer/rczp/index.shtml" target="_blank">
         人才招聘
       </a> </li>
-    <li> <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">京ICP备05014420号</a> <span>|</span>
-      <a>电话：（+86 10）88545426</a> <span>|</span> <b>© 中国国家图书馆版权所有</b> </li> <a target="_blank" href="https://bszs.conac.cn/sitename?method=show&amp;id=37DFB7402E4D3CF3E053022819ACB320"></a>
+    <li>
+      <a>电话：（+86 10）13886511528</a> <span>|</span> <b>© 中国湖北文理学院508版权所有</b> </li> <a target="_blank" href="https://bszs.conac.cn/sitename?method=show&amp;id=37DFB7402E4D3CF3E053022819ACB320"></a>
   </ul>
 </div>
 </template> 
@@ -127,6 +69,8 @@
 
 <script>
 import { getToken } from '@/assets/auth.js'
+import { getBookCount , getUserCount} from '@/net';
+import { ref } from 'vue'
 export default {
 	components: {},
 	props: {},
@@ -170,7 +114,17 @@ export default {
   },
 	mounted:function(){
 		this.runInv();
-	}
+	},setup(){
+    let personSum = ref('')
+    let bookSum = ref('')
+    getUserCount((data)=>{
+      personSum.value = JSON.parse(data)
+    })
+    getBookCount((data)=>{
+      bookSum.value = JSON.parse(data)
+    })
+    return {personSum,bookSum}
+  }
 };
 </script>
 
@@ -186,7 +140,7 @@ export default {
       position: absolute;
       right: 0;                
       bottom: 0;               
-      width: 100%;             
+      width: 100%;
         ul{                    
           float: right;        
         }
@@ -206,5 +160,105 @@ export default {
 .banner img {
   width: 100%;
   max-height: 680px;
+}
+.common-footer{
+  font-size: 14px;
+  color: rgb(255,255,255,0.6);
+}
+.common-footer.common-footer-row1{
+  display: flex;
+  overflow: hidden;
+}
+.common-footer .common-footer-row1 li {
+  float: left;
+  height: 320px;
+  padding: 0 45px;
+  border-right: 1px solid #3AAEBD;
+}
+
+.common-footer .common-footer-row1 li.li5 {
+  flex: 0.5;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  border-right: 0 none;
+}
+
+.common-footer .common-footer-row1 li.li5 dl {
+  float: left;
+  margin: 20px 0 0 0;
+  width: 57px;
+  cursor: pointer;
+}
+
+.common-footer .common-footer-row1 li.li5 dl dt {
+  width: 57px;
+  height: 57px;
+  margin: 2px auto;
+  position: relative;
+}
+
+.common-footer .common-footer-row1 li.li5 dl dt img {
+  display: block;
+  width: 100%;
+}
+
+.common-footer .common-footer-row2 {
+  border-top: 1px solid #3AAEBD;
+  padding: 20px 0 0 0;
+  text-align: center;
+  position: relative;
+}
+
+.common-footer .common-footer-row2 li {
+  padding-bottom: 15px;
+}
+
+.common-footer .common-footer-row2 span {
+  color: #fff;
+  opacity: 0.3;
+  padding: 0 20px;
+}
+
+.common-footer .common-footer-row2 b {
+  color: rgba(255, 255, 255, 1);
+}
+
+.common-footer .common-footer-row2 img {
+  width: 54px;
+  height: 65px;
+  display: block;
+  position: absolute;
+  right: 192px;
+  top: 21px;
+}
+.common-footer {
+  overflow: hidden;
+  background: url('../../../assets/footer-bg.png') right bottom no-repeat #1395a7;
+  background-size: 628px auto;
+  position: relative;
+  z-index: 2;
+  min-width: 100%;
+}
+.common-footer {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 24px;
+}
+ul{
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 40px;
+}
+.zcrs{
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+  background-color: #1395a7;
+  font-family: "Wawati SC";
 }
 </style> 

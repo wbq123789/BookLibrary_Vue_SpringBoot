@@ -1,15 +1,15 @@
 <template>
   <title>图书管理系统</title>
-  <div class="Header">
-    <div class="title"><RouterLink :to="{ name : 'UserMain'}">图书管理系统</RouterLink>
+  <div class="Head">
+    <div class="biaoti"><router-link to="/index">星愿图书管理系统</router-link>
     </div>
       <img
-        style="width: 70px"
-        src="../../../assets/icon-yellow.png"
+        style="width: 70px;height:70px;margin-top: -25px;"
+        src="../../../assets/logo.png"
       />
       <div class="flex-grow" />
       <div class="UserName">
-        欢迎 ： {{ User.username }}用户
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎 ： {{ User.username }}用户
       <el-button type="warning" round @click="userLogout" class="button">退出登录</el-button>
     </div>
   </div>
@@ -34,6 +34,21 @@ function userLogout() {
 </script>
 
 <style>
+.Head{
+  padding:0;
+  margin: 0;
+  background:linear-gradient(#a8edea,#fed6e3);
+  width: 100%;
+}
+.biaoti{
+  width: 600px;
+  height: 30px;
+  translate: 80px;
+  font-size: xxx-large;
+  font-family: "Kaiti SC";
+  color:#330867;
+  opacity: 0.6;
+}
 div a {
   font-weight: bold;
   color: #2c3e50;
@@ -41,57 +56,35 @@ div a {
   padding: 10px;
   border-radius: 4px;
 }
-
 div a.router-link-exact-active {
   color: rgb(230, 161, 233);
 }
-
-
-.Header{
-  height: 70px;
-  background-color: antiquewhite;
-  padding: 0;
-}
-.picture{
-  top:0;
-  right:100px;
-  height: 0;
-}
-.title{
-  margin-left: 90px;
-  font-size:xxx-large;
-  height: 0;
-  font-family: "Kaiti SC";
-}
 .UserName{
-  width:400px;
-  height:90px;
-  position: fixed;
-  right: 1px;
   text-align: center;
+  width: 40%;
   float: right;
-  top:5px;
-  font-size: x-large;
-  margin-top: 16px;
+  height:30px;
+  top: -65px;
+  position: relative;
+  font-size: xx-large;
+  translate: 40px;
+  color: #330867;
+  opacity: 0.6;
+  font-family: "Wawati SC";
 }
-.Header .button{
+.Head .button{
   height:55px;
-  position: fixed;
-  top:10px;
-  right:0;
+  position: relative;
+  top: -5px;
+  opacity: 0.5;
+  float: right;
+  translate: -60px;
+  background:linear-gradient(#a8edea,#fed6e3);
+  border: none;
+  color: #330867;
+  font-size: x-large;
 }
 .flex-grow {
   flex-grow: 1;
-}
-#search{
-  position: absolute;
-  top: 10px;
-  margin-left: 600px;
-  background-color: black;
-  height: 40px;
-  border-radius: 40px;
-  padding: 10px;
-  width: 300px;
-  position: relative;
 }
 </style>
