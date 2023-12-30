@@ -9,7 +9,7 @@
       />
       <div class="flex-grow" />
       <div class="UserName">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎 ： {{ User.username }}用户
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎 ： {{ User.username }}用户&nbsp;&nbsp;&nbsp;&nbsp;
       <el-button type="warning" round @click="userLogout" class="button">退出登录</el-button>
     </div>
   </div>
@@ -61,7 +61,7 @@ div a.router-link-exact-active {
   top: -65px;
   position: relative;
   font-size: xx-large;
-  translate: 40px;
+  translate: 10px;
   color: #330867;
   opacity: 0.6;
   font-family: "Wawati SC";

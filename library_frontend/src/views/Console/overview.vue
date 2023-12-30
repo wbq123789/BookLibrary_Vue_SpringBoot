@@ -2,7 +2,7 @@
   <el-table :data="tableData" style="width: 100%">
     <el-table-column property="id" label="用户编号" width="150" />
     <el-table-column property="username" label="用户姓名" width="300" />
-    <el-table-column property="email" label="用户邮箱" width="600" />
+    <el-table-column property="email" label="用户邮箱" width="450" />
     <el-table-column property="register_time" label="注册时间" />
   </el-table>
 </template>
